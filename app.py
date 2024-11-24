@@ -8,6 +8,9 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from PIL import Image
 import pytesseract
+import spacy
+
+
 
 def calculate_skill_match(job_skills, resume_skills):
     # Convert job skills to lowercase and strip whitespace
@@ -191,4 +194,5 @@ def download_excel():
     return send_file(EXCEL_FILE, as_attachment=True)
 
 if __name__ == '__main__':
+    nlp = spacy.load("en_core_web_sm")
     app.run(host="localhost",port=5000,debug=True)
