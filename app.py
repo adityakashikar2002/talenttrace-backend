@@ -8,38 +8,6 @@ from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from PIL import Image
 import pytesseract
-# from sklearn.feature_extraction.text import TfidfVectorizer
-# from sklearn.metrics.pairwise import cosine_similarity
-
-# Calculate skill match based on job requirements and extracted resume skills
-# def calculate_skill_match(job_skills, resume_skills):
-#     # Convert job skills to lowercase and strip whitespace
-#     job_skills_set = set(skill.lower().strip() for skill in job_skills if skill.strip())
-
-#     # Preprocess resume skills: split by common delimiters and normalize
-#     processed_resume_skills = set()
-#     for skill in resume_skills:
-#         # Split on common delimiters like commas, colons, and spaces
-#         split_skills = re.split(r'[,:;\n]', skill.lower())
-#         # Add cleaned and stripped skills to the set
-#         processed_resume_skills.update(skill.strip() for skill in split_skills if skill.strip())
-    
-#     # Debugging: Print cleaned job and resume skills
-#     print(f"Job Skills: {job_skills_set}")
-#     print(f"Resume Skills (Processed): {processed_resume_skills}")
-
-#     # Find matched skills
-#     matched_skills = job_skills_set.intersection(processed_resume_skills)
-
-#     # Debugging: Print matched skills
-#     print(f"Matched Skills: {matched_skills}")
-
-#     # Calculate match percentage
-#     if not job_skills_set:  # Avoid division by zero
-#         return 0.0
-#     match_percentage = (len(matched_skills) / len(job_skills_set)) * 100
-
-#     return round(match_percentage, 2)  # Return the match as a percentage
 
 def calculate_skill_match(job_skills, resume_skills):
     # Convert job skills to lowercase and strip whitespace
@@ -125,17 +93,6 @@ def extract_details(text):
     # Extract phone number
     phone_pattern = r'\b\d{10}\b|\+?\d{1,2}\s?\d{10}\b'
     details['Phone'] = re.findall(phone_pattern, text)[0] if re.findall(phone_pattern, text) else "N/A"
-
-    # Extract skills section
-    # skills_keywords = ['skills', 'technical skills', 'key skills']
-    # skills_section = None
-
-    # for keyword in skills_keywords:
-    #     keyword_index = text.lower().find(keyword)
-    #     if keyword_index != -1:
-    #         skills_section = text[keyword_index:keyword_index + 300]  
-    #         break
-    # details['Skills'] = skills_section.replace("\n", " ") if skills_section else "N/A"
 
     # Extract skills section and split into individual skills
     skills_keywords = ['skills', 'technical skills', 'key skills']
@@ -234,4 +191,4 @@ def download_excel():
     return send_file(EXCEL_FILE, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="localhost",port=5000,debug=True)
