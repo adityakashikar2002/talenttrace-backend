@@ -8,3 +8,4 @@ Pillow <= 11.0.0
 pytesseract <= 0.3.13
 spacy <= 3.8.2
 scikit-learn <= 1.5.2
+spacy download en_core_web_sm <= 3.8.0
